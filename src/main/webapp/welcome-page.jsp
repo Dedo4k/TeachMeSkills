@@ -11,7 +11,7 @@
     <title>Welcome-page</title>
 </head>
 <body>
-    <h2>Welcome</h2>
+    <h2>Welcome <%= request.getSession(false).getAttribute("login")%></h2>
     <form action="/login" method="get">
         <input type="submit" value="Logout">
     </form>

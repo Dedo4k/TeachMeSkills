@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @WebServlet(urlPatterns = "/login")
@@ -30,10 +31,14 @@ public class LoginServlet extends HttpServlet {
         String login = req.getParameter("login");
         String password = req.getParameter("password");
         if (userDao.checkUser(login, password)) {
-            req.setAttribute("login", login);
+            HttpSession session = req.getSession();
+            session.setAttribute("login", login);
+//            requestDispatcher = servletContext.getRequestDispatcher("/welcome-page");
             resp.sendRedirect(req.getContextPath() + "/welcome-page");
         } else {
-            resp.sendRedirect(req.getContextPath() + "/registration");
+            resp.sendRedirect(req.getContextPath() + "/login");
+//            requestDispatcher = servletContext.getRequestDispatcher("/login");
         }
+//        requestDispatcher.forward(req, resp);
     }
 }

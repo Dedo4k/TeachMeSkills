@@ -17,7 +17,7 @@
         <input type="text" id="login" name="login">
         <br>
         <label for="password">Password:</label>
-        <input type="text" id="password" name="password">
+        <input type="password" id="password" name="password">
         <br>
         <input type="submit" value="Login">
     </form>
