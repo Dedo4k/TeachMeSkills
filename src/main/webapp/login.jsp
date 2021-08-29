@@ -9,20 +9,34 @@
 <html>
 <head>
     <title>Login</title>
+    <link rel="stylesheet" href="login.css">
 </head>
 <body>
-    <h2>Login</h2>
-    <form action="/login" method="post">
-        <label for="login">Login:</label>
-        <input type="text" id="login" name="login">
-        <br>
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password">
-        <br>
-        <input type="submit" value="Login">
-    </form>
-    <form action="/registration" method="get">
-        <input type="submit" value="Registration">
-    </form>
+<main>
+    <div class="login-form-container">
+        <form id="login" action="/login" method="post">
+            <h1 class="form-title">
+                Login
+            </h1>
+            <div class="form-fields">
+                <div class="form-field">
+                    <label>
+                        <input type="text" placeholder="Login" name="login">
+                    </label>
+                </div>
+                <div class="form-field">
+                    <label>
+                        <input type="password" placeholder="Password" name="password">
+                    </label>
+                </div>
+            </div>
+        </form>
+        <div class="form-buttons">
+            <button form="login" class="button">Login</button>
+            <div class="divider">or</div>
+            <button class="button"><a href="/registration" class="registration">Registration</a></button>
+        </div>
+    </div>
+</main>
 </body>
 </html>
