@@ -32,9 +32,9 @@
             </div>
         </form>
         <div class="form-buttons">
-            <button form="login" class="button">Login</button>
+            <button form="login" class="button">Sign in</button>
             <div class="divider">or</div>
-            <button class="button"><a href="/registration" class="registration">Registration</a></button>
+            <button class="button"><a href="/registration" class="registration">Sign up</a></button>
         </div>
     </div>
 </main>

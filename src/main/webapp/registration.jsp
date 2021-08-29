@@ -9,29 +9,44 @@
 <html>
 <head>
     <title>Registration</title>
+    <link rel="stylesheet" href="registration.css">
 </head>
 <body>
-    <h2>Registration</h2>
-    <form action="/registration" method="post">
-        <label for="first_name">First name:</label>
-        <input type="text" id="first_name" name="first_name">
-        <br>
-        <label for="last_name">Last name:</label>
-        <input type="text" id="last_name" name="last_name">
-        <br>
-        <label for="age">Age:</label>
-        <input type="number" id="age" name="age">
-        <br>
-        <label for="login">Login:</label>
-        <input type="text" id="login" name="login">
-        <br>
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password">
-        <br>
-        <label for="conf_password">Confirm password:</label>
-        <input type="password" id="conf_password" name="conf_password">
-        <br>
-        <input type="submit" value="Submit">
-    </form>
+<main>
+    <div class="registration-form-container">
+        <form id="registration" action="/registration" method="post">
+            <h1 class="form-title">
+                Registration
+            </h1>
+            <div class="form-fields">
+                <div class="form-field">
+                    <label for="first_name"></label><input type="text" id="first_name" placeholder="First name"
+                                                           name="first_name">
+                </div>
+                <div class="form-field">
+                    <label for="last_name"></label><input type="text" id="last_name" placeholder="Last name"
+                                                          name="last_name">
+                </div>
+                <div class="form-field">
+                    <label for="age"></label><input type="number" id="age" placeholder="Age" name="age">
+                </div>
+                <div class="form-field">
+                    <label for="login"></label><input type="text" id="login" placeholder="Login" name="login">
+                </div>
+                <div class="form-field">
+                    <label for="password"></label><input type="password" id="password" placeholder="Password"
+                                                         name="password">
+                </div>
+                <div class="form-field">
+                    <label for="conf_password"></label><input type="password" id="conf_password"
+                                                              placeholder="Confirm password" name="conf_password">
+                </div>
+            </div>
+        </form>
+        <div class="form-buttons">
+            <button form="registration" class="button">Sign up</button>
+        </div>
+    </div>
+</main>
 </body>
 </html>

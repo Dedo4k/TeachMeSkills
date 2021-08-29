@@ -26,19 +26,14 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        ServletContext servletContext = getServletContext();
-        RequestDispatcher requestDispatcher;
         String login = req.getParameter("login");
         String password = req.getParameter("password");
         if (userDao.checkUser(login, password)) {
             HttpSession session = req.getSession();
             session.setAttribute("login", login);
-//            requestDispatcher = servletContext.getRequestDispatcher("/welcome-page");
             resp.sendRedirect(req.getContextPath() + "/welcome-page");
         } else {
             resp.sendRedirect(req.getContextPath() + "/login");
-//            requestDispatcher = servletContext.getRequestDispatcher("/login");
         }
-//        requestDispatcher.forward(req, resp);
     }
 }
