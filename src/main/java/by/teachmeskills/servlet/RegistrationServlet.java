@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(urlPatterns = "/registration")
+@WebServlet("/registration")
 public class RegistrationServlet extends HttpServlet {
 
     private final UserDao userDao = new UserDao();
@@ -20,7 +20,7 @@ public class RegistrationServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         ServletContext servletContext = getServletContext();
-        RequestDispatcher requestDispatcher = servletContext.getRequestDispatcher("/registration.jsp");
+        RequestDispatcher requestDispatcher = servletContext.getRequestDispatcher("/pages/registration.jsp");
         requestDispatcher.forward(req, resp);
     }
 

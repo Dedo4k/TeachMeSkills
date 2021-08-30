@@ -9,7 +9,7 @@
 <html>
 <head>
     <title>Registration</title>
-    <link rel="stylesheet" href="registration.css">
+    <link rel="stylesheet" href="../styles/registration.css">
 </head>
 <body>
 <main>

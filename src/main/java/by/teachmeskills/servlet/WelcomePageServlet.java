@@ -9,13 +9,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(urlPatterns = "/welcome-page")
+@WebServlet("/welcome-page")
 public class WelcomePageServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        ServletContext servletContext = getServletContext();
-        RequestDispatcher requestDispatcher = servletContext.getRequestDispatcher("/welcome-page.jsp");
-        requestDispatcher.forward(req, resp);
+        if (req.getSession().getAttribute("user") == null) {
+            resp.sendRedirect(req.getContextPath() + "/login");
+        } else {
+            ServletContext servletContext = getServletContext();
+            RequestDispatcher requestDispatcher = servletContext.getRequestDispatcher("/pages/welcome-page.jsp");
+            requestDispatcher.forward(req, resp);
+        }
     }
 }

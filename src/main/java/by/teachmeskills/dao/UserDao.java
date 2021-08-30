@@ -21,11 +21,11 @@ public class UserDao implements DAO {
         try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD)) {
             PreparedStatement statement = connection.prepareStatement("insert into users " +
                     "(first_name, last_name, age, login, password) value (?, ?, ?, ?, ?)");
-            statement.setString(1, ((User)obj).getFirstName());
-            statement.setString(2, ((User)obj).getLastName());
-            statement.setInt(3, ((User)obj).getAge());
-            statement.setString(4, ((User)obj).getLogin());
-            statement.setString(5, ((User)obj).getPassword());
+            statement.setString(1, ((User) obj).getFirstName());
+            statement.setString(2, ((User) obj).getLastName());
+            statement.setInt(3, ((User) obj).getAge());
+            statement.setString(4, ((User) obj).getLogin());
+            statement.setString(5, ((User) obj).getPassword());
             statement.execute();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -44,31 +44,64 @@ public class UserDao implements DAO {
 
     @Override
     public void update(int id, Object obj) {
-
-    }
-
-    @Override
-    public void delete(int id) {
-
-    }
-
-    public boolean checkUser(String login, String password) {
         try {
             Class.forName("com.mysql.jdbc.Driver");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
         try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD)) {
-            PreparedStatement statement = connection.prepareStatement("select * from users where login = ?");
+            PreparedStatement statement = connection.prepareStatement("update users set first_name = ?, last_name = ?, age = ? where id = ?");
+            statement.setString(1, ((User) obj).getFirstName());
+            statement.setString(2, ((User) obj).getLastName());
+            statement.setInt(3, ((User) obj).getAge());
+            statement.setInt(4, id);
+            statement.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    @Override
+    public void delete(int id) {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD)) {
+            PreparedStatement statement = connection.prepareStatement("delete from users where id = ?");
+            statement.setInt(1, id);
+            statement.execute();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    public User getUserByLoginAndPassword(String login, String password) {
+        User user = null;
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD)) {
+            PreparedStatement statement = connection.prepareStatement("select * from users where login = ? and password = ?");
             statement.setString(1, login);
+            statement.setString(2, password);
             ResultSet rs = statement.executeQuery();
-            if (rs.next()) {
-                return rs.getString("password").equals(password);
+            while (rs.next()) {
+                user = new User();
+                user.setId(rs.getInt("id"));
+                user.setLogin(rs.getString("login"));
+                user.setPassword(rs.getString("password"));
+                user.setFirstName(rs.getString("first_name"));
+                user.setLastName(rs.getString("last_name"));
+                user.setAge(rs.getInt("age"));
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        return false;
+        return user;
     }
 
     public boolean checkLogin(String login) {
