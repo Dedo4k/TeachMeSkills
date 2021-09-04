@@ -1,5 +1,7 @@
 package by.teachmeskills.model;
 
+import java.util.Objects;
+
 public class User {
 
     private int id;
@@ -58,5 +60,18 @@ public class User {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return id == user.id && age == user.age && Objects.equals(login, user.login) && Objects.equals(password, user.password) && Objects.equals(FirstName, user.FirstName) && Objects.equals(LastName, user.LastName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, login, password, FirstName, LastName, age);
     }
 }
